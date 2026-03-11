@@ -20,3 +20,24 @@ Dodatkowe punkty mogą być przyznane za zadania z gwiazdką.
 Za każdy tydzień opóźnienia maksymalna liczba punktów zmniejsza się o jeden.
 Więcej obowiązujących informacji dotyczących pracy z repozytorium znajduje się w instrukcjach.
 
+### 3.2 - ZAD 4
+classDiagram
+    class Job2dDriver {
+        <<interface>>
+        +setPosition(x: int, y: int)
+        +operateTo(x: int, y: int)
+    }
+    class DrawPanelController {
+        +drawLine(line: ILine)
+        +clearPanel()
+    }
+    class Job2dDriverToDrawPanelAdapter {
+        -startX: int
+        -startY: int
+        +setPosition(x: int, y: int)
+        +operateTo(x: int, y: int)
+    }
+    
+    Client ..> Job2dDriver : uses
+    Job2dDriverToDrawPanelAdapter ..|> Job2dDriver : realizes
+    Job2dDriverToDrawPanelAdapter --> DrawPanelController : uses (via DrawerFeature)
