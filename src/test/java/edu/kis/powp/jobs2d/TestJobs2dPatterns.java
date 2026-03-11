@@ -9,6 +9,7 @@ import edu.kis.legacy.drawer.panel.DefaultDrawerFrame;
 import edu.kis.legacy.drawer.panel.DrawPanelController;
 import edu.kis.powp.appbase.Application;
 import edu.kis.powp.jobs2d.drivers.adapter.DrawPanelAdapter;
+import edu.kis.powp.jobs2d.drivers.adapter.LineDrawerAdapter;
 import edu.kis.powp.jobs2d.events.SelectChangeVisibleOptionListener;
 import edu.kis.powp.jobs2d.events.SelectTestFigureOptionListener;
 import edu.kis.powp.jobs2d.features.DrawerFeature;
@@ -45,6 +46,14 @@ public class TestJobs2dPatterns {
 
 		Job2dDriver testDriver = new DrawPanelAdapter();
 		DriverFeature.addDriver("DrawPanelAdapter", testDriver);
+
+		// Tryb linii specjalnej (Special Line)
+		Job2dDriver specialLineDriver = new LineDrawerAdapter(DrawerFeature.getDrawerController(), edu.kis.legacy.drawer.shape.LineFactory.getSpecialLine());
+		DriverFeature.addDriver("Special Line Simulator", specialLineDriver);
+
+		// Tryb linii przerywanej (Dotted Line)
+		Job2dDriver dottedLineDriver = new LineDrawerAdapter(DrawerFeature.getDrawerController(), edu.kis.legacy.drawer.shape.LineFactory.getDottedLine());
+		DriverFeature.addDriver("Dotted Line Simulator", dottedLineDriver);
 
 		DriverFeature.updateDriverInfo();
 	}
