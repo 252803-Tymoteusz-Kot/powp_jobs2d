@@ -1,0 +1,39 @@
+ODPOWIEDŹ NA PYTANIE Z ZADANIA 4
+================================
+
+Pytanie: Jakie wzorce występują w hierarchii poleceń, poprzez fakt posiadania klasy ComplexCommand?
+
+ODPOWIEDŹ:
+----------
+
+W hierarchii poleceń, dzięki klasie ComplexCommand, występują następujące wzorce:
+
+1. COMMAND PATTERN
+   - Podstawowy wzorzec: każde polecenie implementuje interfejs DriverCommand
+   - Metoda execute() wykonuje operacje
+
+2. COMPOSITE PATTERN **[GŁÓWNY]**
+   - ComplexCommand zawiera List<DriverCommand>
+   - Polecenia proste (SetPositionCommand, OperateToCommand) i złożone (ComplexCommand) 
+     traktowane są jednakowo
+   - Umożliwia budowanie drzew poleceń z zagnieżdżeniem
+
+3. ITERATOR PATTERN
+   - Pętla w execute(): for (DriverCommand cmd : commands)
+   - Iteracja przez kolekcję poleceń
+   - Metody pomocnicze: getCommandCount(), isEmpty()
+
+4. BUILDER PATTERN
+   - Metody: addCommand(), addCommands(), removeCommand(), clear()
+   - Krok po kroku konstruujemy złożone sekwencje poleceń
+   - Elastyczne budowanie bez gigantycznych konstruktorów
+
+5. STRATEGY PATTERN
+   - Każde polecenie to inna strategia wykonania operacji
+   - Polimorfizm pozwala na zamienne użycie różnych strategii
+   - Każda implementacja DriverCommand ma inną strategię execute()
+
+PODSUMOWANIE:
+Głównym wzorcem jest COMPOSITE PATTERN, który pozwala na traktowanie poleceń 
+prostych i złożonych jednakowo. Oprócz tego, struktura kompleksowego polecenia
+implikuje Iterator, Builder i Strategy Pattern.
