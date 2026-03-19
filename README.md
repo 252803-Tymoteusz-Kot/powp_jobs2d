@@ -21,6 +21,11 @@ Za każdy tydzień opóźnienia maksymalna liczba punktów zmniejsza się o jede
 Więcej obowiązujących informacji dotyczących pracy z repozytorium znajduje się w instrukcjach.
 
 ### 3.2 - ZAD 4
+```mermaid
+---
+config:
+  theme: neo-dark
+---
 classDiagram
     class Job2dDriver {
         <<interface>>
@@ -38,6 +43,7 @@ classDiagram
         +operateTo(x: int, y: int)
     }
     
-    Client ..> Job2dDriver : uses
+    Client "1" ..> "1..*" Job2dDriver : uses
     Job2dDriverToDrawPanelAdapter ..|> Job2dDriver : realizes
-    Job2dDriverToDrawPanelAdapter --> DrawPanelController : uses (via DrawerFeature)
+    Job2dDriverToDrawPanelAdapter "1" --> "1" DrawPanelController : uses (via DrawerFeature)
+```
