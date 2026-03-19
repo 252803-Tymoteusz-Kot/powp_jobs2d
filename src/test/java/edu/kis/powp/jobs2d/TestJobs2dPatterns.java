@@ -8,6 +8,11 @@ import java.util.logging.Logger;
 import edu.kis.legacy.drawer.panel.DefaultDrawerFrame;
 import edu.kis.legacy.drawer.panel.DrawPanelController;
 import edu.kis.powp.appbase.Application;
+import edu.kis.powp.jobs2d.Job2dDriver;
+import edu.kis.powp.jobs2d.command.CircleCommandFactory;
+import edu.kis.powp.jobs2d.command.CommandAndCompositePatternTest;
+import edu.kis.powp.jobs2d.command.RectangleCommandFactory;
+import edu.kis.powp.jobs2d.command.TriangleCommandFactory;
 import edu.kis.powp.jobs2d.drivers.adapter.DrawPanelAdapter;
 import edu.kis.powp.jobs2d.drivers.adapter.LineDrawerAdapter;
 import edu.kis.powp.jobs2d.events.SelectChangeVisibleOptionListener;
@@ -34,6 +39,32 @@ public class TestJobs2dPatterns {
 			DriverFeature.getDriverManager());
 
 		application.addTest("Figure Joe 2", selectTestFigure2OptionListener);
+	}
+
+	/**
+	 * Setup tests for Command and Composite Pattern (Task 5).
+	 * Tests factory pattern implementations for creating shapes.
+	 * 
+	 * @param application Application context.
+	 */
+	private static void setupCommandPatternTests(Application application) {
+		application.addTest("Command Pattern Tests", (ActionEvent e) -> 
+			CommandAndCompositePatternTest.main(new String[]{}));
+		
+		application.addTest("Rectangle Factory", (ActionEvent e) -> {
+			Job2dDriver driver = DriverFeature.getDriverManager().getCurrentDriver();
+			RectangleCommandFactory.createRectangle(driver, 10, 10, 50, 30).execute();
+		});
+		
+		application.addTest("Triangle Factory", (ActionEvent e) -> {
+			Job2dDriver driver = DriverFeature.getDriverManager().getCurrentDriver();
+			TriangleCommandFactory.createTriangle(driver, 10, 10, 40).execute();
+		});
+		
+		application.addTest("Circle Factory", (ActionEvent e) -> {
+			Job2dDriver driver = DriverFeature.getDriverManager().getCurrentDriver();
+			CircleCommandFactory.createCircle(driver, 50, 50, 30).execute();
+		});
 	}
 
 	/**
@@ -103,6 +134,7 @@ public class TestJobs2dPatterns {
 				DriverFeature.setupDriverPlugin(app);
 				setupDrivers(app);
 				setupPresetTests(app);
+				setupCommandPatternTests(app);
 				setupLogger(app);
 
 				app.setVisibility(true);
